@@ -42,7 +42,6 @@ public class MediumPlayerAttack : MonoBehaviour
             {
                 Attack();
                 currentAttackSpawnDelay = attackSpawnDelay;
-                pressed = false;
             }
         }
         else
@@ -62,7 +61,8 @@ public class MediumPlayerAttack : MonoBehaviour
 
             if (currentAttackDestroyDelay <= 0)
             {
-                DestroyAttack();
+                DestroyAttack(); 
+                pressed = false;
             }
         }
         
@@ -77,8 +77,17 @@ public class MediumPlayerAttack : MonoBehaviour
     void Attack()
     {
         currentAttackDestroyDelay = attackDestroyDelay;
-        currentAttack = Instantiate(MediumHitBox, new Vector2(transform.position.x + 1.65f, transform.position.y + 0.5f), Quaternion.identity);
 
+        playerMovement movement = GetComponent<playerMovement>();
+        if (!movement.facingRight)
+        {
+            currentAttack = Instantiate(MediumHitBox, new Vector2(transform.position.x + 1.45f * -1, transform.position.y + 0.5f), Quaternion.identity);
+
+        }
+        else
+        {
+            currentAttack = Instantiate(MediumHitBox, new Vector2(transform.position.x + 1.45f, transform.position.y + 0.5f), Quaternion.identity);
+        }
         currentAttack.transform.SetParent(transform);
 
         HitboxScript hitbox = currentAttack.AddComponent<HitboxScript>();

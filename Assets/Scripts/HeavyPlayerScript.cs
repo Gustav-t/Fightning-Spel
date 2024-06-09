@@ -42,7 +42,6 @@ public class HeavyPlayerAttack : MonoBehaviour
             {
                 Attack();
                 currentAttackSpawnDelay = attackSpawnDelay;
-                pressed = false;
             }
         }
         else
@@ -63,6 +62,7 @@ public class HeavyPlayerAttack : MonoBehaviour
             if (currentAttackDestroyDelay <= 0)
             {
                 DestroyAttack();
+                pressed = false;
             }
         }
 
@@ -77,8 +77,17 @@ public class HeavyPlayerAttack : MonoBehaviour
     void Attack()
     {
         currentAttackDestroyDelay = attackDestroyDelay;
-        currentAttack = Instantiate(HeavyHitbox, new Vector2(transform.position.x + 1.8f, transform.position.y + 0.5f), Quaternion.identity);
 
+        playerMovement movement = GetComponent<playerMovement>();
+        if (!movement.facingRight)
+        {
+            currentAttack = Instantiate(HeavyHitbox, new Vector2(transform.position.x + 1.45f * -1, transform.position.y + 0.5f), Quaternion.identity);
+
+        }
+        else
+        {
+            currentAttack = Instantiate(HeavyHitbox, new Vector2(transform.position.x + 1.45f, transform.position.y + 0.5f), Quaternion.identity);
+        }
         currentAttack.transform.SetParent(transform);
 
         HitboxScript hitbox = currentAttack.AddComponent<HitboxScript>();
