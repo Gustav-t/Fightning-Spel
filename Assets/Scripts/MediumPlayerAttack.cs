@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpelarAttack : MonoBehaviour
+public class MediumPlayerAttack : MonoBehaviour
 {
     public GameObject MediumHitBox;
     private GameObject currentAttack;
@@ -15,7 +15,7 @@ public class SpelarAttack : MonoBehaviour
     float attackSpawnDelay = 0.3f;
     float attackDestroyDelay = 0.2f;
 
-    bool pressed = false;
+    public bool pressed = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,9 +25,13 @@ public class SpelarAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && !pressed)
+        if (Input.GetKeyDown(KeyCode.R) && !pressed)
         {
-            pressed = true;   
+            pressed = true;
+            LightPlayerAttack light = GetComponent<LightPlayerAttack>();
+            light.pressed = false;
+            HeavyPlayerAttack heavy = GetComponent<HeavyPlayerAttack>();
+            heavy.pressed = false;
         }
 
         if (pressed == true)
@@ -50,6 +54,12 @@ public class SpelarAttack : MonoBehaviour
         {
             currentAttackDestroyDelay -= Time.deltaTime;
 
+            if (currentAttackDestroyDelay <= attackDestroyDelay / 2)
+            {
+                HitboxScript hitbox = currentAttack.GetComponent<HitboxScript>();
+                hitbox.attack = false;
+            }
+
             if (currentAttackDestroyDelay <= 0)
             {
                 DestroyAttack();
@@ -67,8 +77,11 @@ public class SpelarAttack : MonoBehaviour
     void Attack()
     {
         currentAttackDestroyDelay = attackDestroyDelay;
-        currentAttack = Instantiate(MediumHitBox, new Vector2(transform.position.x + 1.6f, transform.position.y + 0.5f), Quaternion.identity);
-        MedScript medScript = currentAttack.AddComponent<MedScript>();
-        medScript.damage = damage;
+        currentAttack = Instantiate(MediumHitBox, new Vector2(transform.position.x + 1.65f, transform.position.y + 0.5f), Quaternion.identity);
+
+        currentAttack.transform.SetParent(transform);
+
+        HitboxScript hitbox = currentAttack.AddComponent<HitboxScript>();
+        hitbox.damage = damage;
     }
 }

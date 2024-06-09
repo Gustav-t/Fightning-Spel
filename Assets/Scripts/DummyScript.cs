@@ -21,4 +21,15 @@ public class DummyScript : MonoBehaviour
         Debug.Log("Dummy died");
         Destroy(gameObject);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Collision detected with " + collision.gameObject.name);
+
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("trigger detected with " + collision.gameObject.name);
+    }
 }
+
