@@ -5,7 +5,8 @@ using UnityEngine;
 public class playerMovement : MonoBehaviour
 {
     Rigidbody2D rb;
-    
+    public float speed = 2f;
+    public float jump = 20f;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -15,7 +16,7 @@ public class playerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (Input.GetKey(KeyCode.D))
         {
@@ -27,7 +28,7 @@ public class playerMovement : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-           rb.AddForce(new Vector3 (0, 5, 0), ForceMode2D.Impulse);
+            rb.AddForce(new Vector3(0, jump,0), ForceMode2D.Impulse);
         }
        
     }

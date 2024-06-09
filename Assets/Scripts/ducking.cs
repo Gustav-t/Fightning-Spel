@@ -6,14 +6,16 @@ public class ducking : MonoBehaviour
 {
     public float normalHeight = 2.0f;
     public float duckHeight = 1.0f;
-    private BoxCollider2D boxCollider;
+    private BoxCollider2D bc;
     private bool isDucking = false;
+    private SpriteRenderer sr;
 
     void Start()
     {
-        boxCollider = GetComponent<BoxCollider2D>();
+        bc = GetComponent<BoxCollider2D>();
+        sr = GetComponent<SpriteRenderer>();
         // Set the initial size of the collider to normal height
-        boxCollider.size = new Vector2(boxCollider.size.x, normalHeight);
+        bc.size = new Vector2(bc.size.x, normalHeight);
     }
 
     void Update()
@@ -21,6 +23,7 @@ public class ducking : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.DownArrow) && !isDucking)
         {
             Duck();
+            
         }
         else if (Input.GetKeyUp(KeyCode.DownArrow) && isDucking)
         {
@@ -31,16 +34,16 @@ public class ducking : MonoBehaviour
     void Duck()
     {
         isDucking = true;
-        boxCollider.size = new Vector2(boxCollider.size.x, duckHeight);
+        bc.size = new Vector2(bc.size.x, duckHeight);
         // Optionally, adjust the offset to reposition the collider
-        boxCollider.offset = new Vector2(boxCollider.offset.x, boxCollider.offset.y - (normalHeight - duckHeight) / 2);
+        bc.offset = new Vector2(bc.offset.x, bc.offset.y - (normalHeight - duckHeight) / 2);
     }
 
     void StandUp()
     {
         isDucking = false;
-        boxCollider.size = new Vector2(boxCollider.size.x, normalHeight);
+        bc.size = new Vector2(bc.size.x, normalHeight);
         // Reset the offset back to its original position
-        boxCollider.offset = new Vector2(boxCollider.offset.x, boxCollider.offset.y + (normalHeight - duckHeight) / 2);
+        bc.offset = new Vector2(bc.offset.x, bc.offset.y + (normalHeight - duckHeight) / 2);
     }
 }

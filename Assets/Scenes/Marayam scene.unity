@@ -315,6 +315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b366ea4419a7f4f957b6ff903dd8d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 2
+  jump: 50
 --- !u!50 &1302263248
 Rigidbody2D:
   serializedVersion: 4
@@ -330,7 +332,7 @@ Rigidbody2D:
   m_Mass: 6
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -414,7 +416,7 @@ GameObject:
   - component: {fileID: 1854923167}
   - component: {fileID: 1854923170}
   m_Layer: 0
-  m_Name: Square
+  m_Name: floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -435,7 +437,7 @@ Rigidbody2D:
   m_Mass: 27.55
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
