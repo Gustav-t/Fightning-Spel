@@ -1,8 +1,9 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DummyScript : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
     Rigidbody2D rb;
     public float health = 5;
@@ -50,7 +51,7 @@ public class DummyScript : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Dummy died");
+        Debug.Log("Player died");
         Destroy(gameObject);
     }
 
