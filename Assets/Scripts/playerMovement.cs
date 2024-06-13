@@ -6,43 +6,26 @@ using UnityEngine;
 public class playerMovement : MonoBehaviour
 {
     Rigidbody2D rb;
-    public float speed = 2f;
+    public float speed = 7f;
     public float jump = 20f;
-    private bool onGround = false;
+    public bool onGround = false;
     public bool facingRight = true;
 
-    private MediumPlayerAttack midPlayerAttack;
-    private LightPlayerAttack ligPlayerAttack;
-    private HeavyPlayerAttack hevPlayerAttack;
+    public bool pressed = false;
 
-    bool attack;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
        
         transform.position = new Vector3(-3,0,0);
-
-        midPlayerAttack = GetComponent<MediumPlayerAttack>();
-        ligPlayerAttack = GetComponent<LightPlayerAttack>();
-        hevPlayerAttack = GetComponent<HeavyPlayerAttack>();
-
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (midPlayerAttack.pressed || ligPlayerAttack.pressed || hevPlayerAttack.pressed)
-        {
-            attack = true;
-        }
-        else
-        {
-            attack = false;
-        }
 
-        if (Input.GetKey(KeyCode.D) && !attack)
+        if (Input.GetKey(KeyCode.D) && !pressed)
         {
             transform.position += new Vector3(speed,0, 0) * Time.deltaTime;
             if (!facingRight) { // utropstäcken betyder motsattsen, alltså att facinRight INTE är true
@@ -50,7 +33,7 @@ public class playerMovement : MonoBehaviour
             
             }
         }
-        if (Input.GetKey(KeyCode.A) && !attack)
+        if (Input.GetKey(KeyCode.A) && !pressed)
         {
             transform.position += new Vector3(-speed, 0, 0) * Time.deltaTime;
             if (facingRight)
@@ -59,7 +42,7 @@ public class playerMovement : MonoBehaviour
 
             }
         }
-        if (onGround && Input.GetKeyDown(KeyCode.Space) && !attack)
+        if (onGround && Input.GetKeyDown(KeyCode.Space) && !pressed)
         {
             rb.AddForce(new Vector3(0, jump,0), ForceMode2D.Impulse); //kan bara hoppa om onGround = true
             onGround = false; //Stoppar spelaren från att hoppa direkt
