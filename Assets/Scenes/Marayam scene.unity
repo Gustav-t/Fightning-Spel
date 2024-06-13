@@ -594,8 +594,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c8a74a84a73e9044bdf4ea96914cd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalHeight: 4
-  duckHeight: 2
 --- !u!114 &2000784560
 MonoBehaviour:
   m_ObjectHideFlags: 0

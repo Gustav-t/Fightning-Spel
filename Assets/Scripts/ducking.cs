@@ -4,22 +4,45 @@ using UnityEngine;
 
 public class ducking : MonoBehaviour
 {
-    public float normalHeight = 2.0f;
-    public float duckHeight = 1.0f;
+    private int normalHeight;
+    private float duckHeight;
     private BoxCollider2D bc;
     private bool isDucking = false;
     private SpriteRenderer sr;
+    
 
     void Start()
     {
+       
         bc = GetComponent<BoxCollider2D>();
+        if (bc = null) {
+
+            Debug.LogError("No boxCollider found on this object");
+            return;
+        }
         sr = GetComponent<SpriteRenderer>();
+        if (sr = null)
+        {
+
+            Debug.LogError("No spriteRenderer found on this object");
+            return;
+        }
         // Set the initial size of the collider to normal height
+        normalHeight = Mathf.RoundToInt(bc.bounds.size.y);
+
+       
+        duckHeight = normalHeight / 2.0f; 
+
         bc.size = new Vector2(bc.size.x, normalHeight);
+        
+
+
     }
+    
 
     void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.DownArrow) && !isDucking)
         {
             Duck();
